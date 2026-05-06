@@ -30,7 +30,7 @@ class HomeScreen extends ConsumerWidget {
                   // Make use of the provider
                   Image.asset(allProducts[index].image, width: 60, height: 60),
                   Text(allProducts[index].title),
-                  Text('R${allProducts[index].price}'),
+                  Text('£${allProducts[index].price}'),
                 ],
               ),
             );
