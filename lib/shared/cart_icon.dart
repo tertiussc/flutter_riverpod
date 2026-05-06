@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/screens/cart/cart_screen.dart';
+import 'package:flutter_riverpod_app/screens/cart/cart_screen.dart';
 
 class CartIcon extends StatelessWidget {
   const CartIcon({super.key});
