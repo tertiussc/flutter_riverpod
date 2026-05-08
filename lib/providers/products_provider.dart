@@ -1,5 +1,8 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod_app/models/product.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+// Let's flutter know that this current file will have another generated file that is PART of this file
+part 'products_provider.g.dart';
 
 // Product List
 const List<Product> allProducts = [
@@ -13,12 +16,18 @@ const List<Product> allProducts = [
   Product(id: '8', title: 'Electric Guitar', price: 52, image: 'assets/products/guitar.png'),
 ];
 
-// Actual Provider
-final productsProvider = Provider((ref) {
-  return allProducts;
-});
-
 // Sample provider with 'additional' methods applied to them
-final reducedProductsProvider = Provider((ref) {
+// final reducedProductsProvider = Provider((ref) {
+//   return allProducts.where((p) => p.price < 50).toList();
+// });
+
+// generated providers
+@riverpod
+List<Product> products(ref) {
+  return allProducts;
+}
+
+@riverpod
+List<Product> reducedProducts(ref) {
   return allProducts.where((p) => p.price < 50).toList();
-});
+}
