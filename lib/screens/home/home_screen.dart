@@ -34,10 +34,18 @@ class HomeScreen extends ConsumerWidget {
                   Text('£${allProducts[index].price}'),
                   Expanded(child: SizedBox()),
                   // Dynamically add button depending on if the product is in the cart
-                  if (cartProducts.contains(allProducts[index])) TextButton(onPressed: () {}, child: const Text('Remove')),
+                  if (cartProducts.contains(allProducts[index]))
+                    TextButton(
+                      onPressed: () {
+                        ref.read(cartNotifierProvider.notifier).removeProduct(allProducts[index]);
+                      },
+                      child: const Text('Remove'),
+                    ),
                   if (!cartProducts.contains(allProducts[index]))
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        ref.read(cartNotifierProvider.notifier).addProduct(allProducts[index]);
+                      },
                       style: TextButton.styleFrom(backgroundColor: Colors.blueGrey, foregroundColor: Colors.white),
                       child: const Text('Add to Cart'),
                     ),
