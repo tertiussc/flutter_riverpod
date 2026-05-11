@@ -24,3 +24,15 @@ class CartNotifier extends _$CartNotifier {
     }
   }
 }
+
+// New provider to calculate price
+@riverpod
+int cartTotal(ref) {
+  final cartProducts = ref.watch(cartProvider);
+  int total = 0;
+
+  for (Product product in cartProducts) {
+    total += product.price;
+  }
+  return total;
+}
