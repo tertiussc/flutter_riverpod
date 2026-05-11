@@ -44,8 +44,15 @@ class _CartScreenState extends ConsumerState<CartScreen> {
                 );
               }).toList(), // output cart products here
             ),
-            // Show totals
-            if (total != 0) Text('Total price - £$total'),
+            // Display totals when items in cart
+            if (cartProducts.isEmpty)
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                decoration: BoxDecoration(color: Colors.amber, borderRadius: BorderRadius.circular(8)),
+                child: Text('No products in cart.'),
+              )
+            else
+              Text('Total price - £$total', style: TextStyle(fontWeight: FontWeight.bold)),
             // output totals here
           ],
         ),
