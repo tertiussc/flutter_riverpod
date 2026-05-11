@@ -4,12 +4,13 @@ import 'package:flutter_riverpod_app/providers/cart_provider.dart';
 import 'package:flutter_riverpod_app/providers/products_provider.dart';
 import 'package:flutter_riverpod_app/shared/cart_icon.dart';
 
-// replace stateless with Consumer state so that it can access the provider state, this is only for Stateless widgets
 class HomeScreen extends ConsumerWidget {
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final allProducts = ref.watch(productsProvider);
-    final cartProducts = ref.watch(cartNotifierProvider);
+    final cartProducts = ref.watch(cartProvider);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Garage Sale Products'), actions: const [CartIcon()]),
@@ -26,27 +27,26 @@ class HomeScreen extends ConsumerWidget {
           itemBuilder: (context, index) {
             return Container(
               padding: const EdgeInsets.all(20),
-              color: Colors.blueGrey.withValues(alpha: 0.5),
+              color: Colors.blueGrey.withAlpha(5),
               child: Column(
                 children: [
                   Image.asset(allProducts[index].image, width: 60, height: 60),
                   Text(allProducts[index].title),
                   Text('£${allProducts[index].price}'),
-                  Expanded(child: SizedBox()),
-                  // Dynamically add button depending on if the product is in the cart
+
                   if (cartProducts.contains(allProducts[index]))
                     TextButton(
                       onPressed: () {
-                        ref.read(cartNotifierProvider.notifier).removeProduct(allProducts[index]);
+                        ref.read(cartProvider.notifier).removeProduct(allProducts[index]);
                       },
                       child: const Text('Remove'),
                     ),
+
                   if (!cartProducts.contains(allProducts[index]))
                     TextButton(
                       onPressed: () {
-                        ref.read(cartNotifierProvider.notifier).addProduct(allProducts[index]);
+                        ref.read(cartProvider.notifier).addProduct(allProducts[index]);
                       },
-                      style: TextButton.styleFrom(backgroundColor: Colors.blueGrey, foregroundColor: Colors.white),
                       child: const Text('Add to Cart'),
                     ),
                 ],
