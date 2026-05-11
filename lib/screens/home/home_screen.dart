@@ -47,6 +47,7 @@ class HomeScreen extends ConsumerWidget {
                       onPressed: () {
                         ref.read(cartProvider.notifier).addProduct(allProducts[index]);
                       },
+                      style: TextButton.styleFrom(backgroundColor: Colors.blueGrey, foregroundColor: Colors.white),
                       child: const Text('Add to Cart'),
                     ),
                 ],
